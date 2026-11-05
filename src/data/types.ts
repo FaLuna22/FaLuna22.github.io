@@ -66,6 +66,7 @@ export interface SiteContent {
     downloadCv: string;
     question: string;
     result: string;
+    more: string;
     all: string;
     skills: string;
     certifications: string;

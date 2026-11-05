@@ -28,6 +28,7 @@ export const en: SiteContent = {
     downloadCv: "Download CV (ES)",
     question: "Question",
     result: "Result",
+    more: "More",
     all: "All",
     skills: "Tools",
     certifications: "Certificates & events",
@@ -298,7 +299,7 @@ export const en: SiteContent = {
       { title: "Surfing", text: "I surf recreationally.", icon: "wave", image: "/images/life/surf.webp", imageAlt: "Fabricio smiles on the shore in his surf rash guard" },
       { title: "Football", text: "Pick-up games with my friends.", icon: "ball", image: "/images/life/futbol-equipo.webp", imageAlt: "Fabricio and a large group of friends pose on a football pitch" },
       { title: "Singing, poetry and drawing", text: "My creative side: I sing, write poetry and draw.", icon: "pencil", image: "/images/life/boceto.webp", imageAlt: "Fabricio's ink sketch: a cross-hatched portrait" },
-      { title: "Design and video podcast", detail: "Art & Design Director · Económica PUCP", text: "I lead the visual identity, reels and video podcast that explain economics to non-specialist audiences.", icon: "palette" },
+      { title: "Design and video podcast", detail: "Art & Design Director · Económica PUCP", text: "I lead the visual identity, reels and video podcast that explain economics to non-specialist audiences.", icon: "palette", image: "/images/life/videopodcast.webp", imageAlt: "Fabricio hosts an interview on Económica PUCP's video podcast «No vale decir depende»" },
     ],
     galleryTitle: "Moments",
     gallery: es.beyond.gallery.map((g, i) => ({
