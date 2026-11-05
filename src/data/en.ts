@@ -296,7 +296,7 @@ export const en: SiteContent = {
       { title: "Amateur boxing", detail: "1 official fight won", text: "Certified boxer from the Tito Montes Academy in Cusco.", icon: "boxing" },
       { title: "Downhill", text: "Bike rides around Cusco with my cousin, like the one to the Temple of the Moon.", icon: "bike", image: "/images/life/downhill.webp", imageAlt: "Fabricio and his cousin with their bikes next to Inca terraces at the Temple of the Moon, Cusco" },
       { title: "Surfing", text: "I surf recreationally.", icon: "wave", image: "/images/life/surf.webp", imageAlt: "Fabricio smiles on the shore in his surf rash guard" },
-      { title: "Football", text: "Pick-up games with my friends.", icon: "ball" },
+      { title: "Football", text: "Pick-up games with my friends.", icon: "ball", image: "/images/life/futbol-equipo.webp", imageAlt: "Fabricio and a large group of friends pose on a football pitch" },
       { title: "Singing, poetry and drawing", text: "My creative side: I sing, write poetry and draw.", icon: "pencil" },
       { title: "Design and video podcast", detail: "Art & Design Director · Económica PUCP", text: "I lead the visual identity, reels and video podcast that explain economics to non-specialist audiences.", icon: "palette" },
     ],

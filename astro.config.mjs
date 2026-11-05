@@ -6,6 +6,10 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://faluna22.github.io",
   trailingSlash: "ignore",
+  build: {
+    // CSS dentro del HTML: evita páginas sin estilos si el navegador guardó un HTML viejo.
+    inlineStylesheets: "always",
+  },
   vite: {
     plugins: [tailwindcss()],
   },

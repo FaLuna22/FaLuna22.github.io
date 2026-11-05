@@ -364,6 +364,8 @@ export const es: SiteContent = {
         title: "Fútbol",
         text: "Pichangas con mis amigos.",
         icon: "ball",
+        image: "/images/life/futbol-equipo.webp",
+        imageAlt: "Fabricio y un grupo grande de amigos posan en una cancha de fútbol",
       },
       {
         title: "Canto, poesía y dibujo",
