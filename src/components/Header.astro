@@ -1,0 +1,124 @@
+---
+import Icon from "./Icon.astro";
+import type { SiteContent } from "../data/types";
+
+interface Props {
+  t: SiteContent;
+}
+
+const { t } = Astro.props;
+const links = [
+  ["#about", t.nav.about],
+  ["#projects", t.nav.projects],
+  ["#experience", t.nav.experience],
+  ["#education", t.nav.education],
+  ["#beyond", t.nav.beyond],
+  ["#contact", t.nav.contact],
+];
+---
+
+<header id="site-header" class="sticky top-0 z-50 border-b border-transparent transition-colors">
+  <div class="container-x flex h-16 items-center justify-between gap-4">
+    <a href={t.lang === "es" ? "/" : "/en/"} class="mono flex items-center gap-2.5 font-semibold no-underline">
+      <span class="logo">{t.person.initials}</span>
+      <span class="hidden sm:inline text-[0.95rem]">{t.person.name}</span>
+    </a>
+
+    <nav aria-label={t.ui.menu} class="hidden lg:block">
+      <ul class="flex items-center gap-7 text-sm">
+        {links.map(([href, label]) => (
+          <li><a href={href} class="nav-link">{label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href={t.ui.switchLangHref} class="icon-link mono text-xs font-semibold" hreflang={t.lang === "es" ? "en" : "es"}
+        aria-label={t.lang === "es" ? "Read in English" : "Leer en español"}>
+        {t.ui.switchLang}
+      </a>
+      <button type="button" id="theme-toggle" class="icon-link cursor-pointer" aria-label={t.ui.themeToggle} title={t.ui.themeToggle}>
+        <Icon name="moon" size={18} class="theme-moon" />
+        <Icon name="sun" size={18} class="theme-sun" />
+      </button>
+      <details class="lg:hidden relative" id="mobile-menu">
+        <summary class="icon-link cursor-pointer list-none" aria-label={t.ui.menu}>
+          <Icon name="menu" size={18} />
+        </summary>
+        <nav class="card absolute right-0 mt-2 w-56 p-2" aria-label={t.ui.menu}>
+          {links.map(([href, label]) => (
+            <a href={href} class="block rounded-lg px-3 py-2 text-sm no-underline hover:bg-[var(--bg-alt)]">{label}</a>
+          ))}
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  #site-header {
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  }
+  #site-header.scrolled { border-bottom-color: var(--rule); }
+  .logo {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+  .nav-link {
+    color: var(--ink-2);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    position: relative;
+  }
+  .nav-link:hover { color: var(--ink); }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.2s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+  summary::-webkit-details-marker { display: none; }
+  :global(.theme-sun) { display: none; }
+  :global(:root[data-theme="dark"] .theme-sun) { display: block; }
+  :global(:root[data-theme="dark"] .theme-moon) { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"]) .theme-sun) { display: block; }
+    :global(:root:not([data-theme="light"]) .theme-moon) { display: none; }
+  }
+</style>
+
+<script>
+  const header = document.getElementById("site-header");
+  const onScroll = () => header?.classList.toggle("scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  const root = document.documentElement;
+  document.getElementById("theme-toggle")?.addEventListener("click", () => {
+    const isDark =
+      root.dataset.theme === "dark" ||
+      (!root.dataset.theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const next = isDark ? "light" : "dark";
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem("theme", next);
+    } catch (e) {}
+  });
+
+  const menu = document.getElementById("mobile-menu") as HTMLDetailsElement | null;
+  menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => (menu.open = false)));
+</script>

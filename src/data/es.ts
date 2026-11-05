@@ -1,0 +1,305 @@
+import type { SiteContent } from "./types";
+
+const GH = "https://github.com/FaLuna22";
+const DSP = `${GH}/Data-Science-Python/tree`;
+
+export const es: SiteContent = {
+  lang: "es",
+  meta: {
+    title: "Fabricio Luna Palacios · Economista y científico de datos",
+    description:
+      "Economista PUCP. Uso datos abiertos, satélites e IA para responder preguntas de política pública en el Perú: pobreza, capital humano, incendios en la puna y más.",
+  },
+  nav: {
+    about: "Sobre mí",
+    projects: "Proyectos",
+    experience: "Experiencia",
+    education: "Formación",
+    beyond: "Más allá",
+    contact: "Contacto",
+  },
+  ui: {
+    switchLang: "EN",
+    switchLangHref: "/en/",
+    themeToggle: "Cambiar tema claro u oscuro",
+    menu: "Menú",
+    viewProjects: "Ver proyectos",
+    downloadCv: "Descargar CV",
+    question: "Pregunta",
+    result: "Resultado",
+    all: "Todos",
+    skills: "Herramientas",
+    certifications: "Certificaciones",
+    achievements: "Logros",
+    languages: "Idiomas",
+    contactTitle: "¿Conversamos?",
+    contactText:
+      "Busco equipos que usen datos para tomar mejores decisiones públicas: políticas sociales, regulación, minería y desarrollo regional. Escríbeme y te respondo pronto.",
+    writeMe: "Escríbeme",
+    rights: "Todos los derechos reservados.",
+    built: "Hecho con Astro, publicado en GitHub Pages.",
+  },
+  person: {
+    name: "Fabricio Luna Palacios",
+    role: "Economista · Ciencia de datos para políticas públicas",
+    location: "Lima, Perú",
+    tagline:
+      "Convierto encuestas, imágenes de satélite y documentos públicos en respuestas claras para decidir mejor. Bachiller en Economía por la PUCP, del quinto superior.",
+    initials: "FL",
+    cv: "/files/CV_Fabricio_Luna.pdf",
+    email: "luna.f@pucp.edu.pe",
+    linkedin: "https://www.linkedin.com/in/fabricio-luna-palacios-400ab6298",
+    github: GH,
+  },
+  highlights: [
+    { value: "Top 10 %", label: "Rendimiento histórico, Economía PUCP" },
+    { value: "27,6 %", label: "Pobreza oficial replicada con la ENAHO" },
+    { value: "10 / 10", label: "Cifras del BCRP correctas con mi MCP" },
+  ],
+  about: {
+    title: "Sobre mí",
+    paragraphs: [
+      "Soy economista de la PUCP y trabajo en la frontera entre la economía aplicada y la ciencia de datos. Me interesa que un número no se quede en un Excel: que llegue limpio, validado y bien explicado a quien tiene que decidir.",
+      "Hoy soy asistente parlamentario en la Cámara de Diputados, donde doy seguimiento a los pedidos de municipalidades y de la población del Cusco ante el Estado. Antes fui practicante de ciencia de datos en el QLAB PUCP y trabajé en un proyecto de segmentación con trabajo de campo en Lima Metropolitana.",
+      "Mi tesis estima el stock de capital humano del Perú con la metodología Jorgenson-Fraumeni. En paralelo, construyo herramientas con agentes de IA (Claude Code, MCP) para que el análisis sea reproducible. Me interesa en especial el seguimiento de compromisos sociales en el sector minero.",
+    ],
+    skillGroups: [
+      { name: "Análisis", items: ["Econometría", "Evaluación de impacto", "Encuestas y trabajo de campo", "ENAHO · INEI · BCRP · SBS"] },
+      { name: "Machine learning e IA", items: ["scikit-learn", "Fine-tuning (BETO)", "LLMs locales", "Claude Code · MCP", "OCR y Whisper"] },
+      { name: "Geoespacial", items: ["GeoPandas", "Sentinel-2 · MODIS", "NASA FIRMS", "Folium · Leaflet"] },
+      { name: "Herramientas", items: ["Python", "Stata", "SQL", "Power BI", "Excel (macros)", "Streamlit", "Git y GitHub"] },
+    ],
+  },
+  projects: {
+    title: "Proyectos",
+    intro:
+      "Cada proyecto responde una pregunta concreta, con datos abiertos y con el código a un clic. Empiezo por los que más me enorgullecen.",
+    filters: ["Geoespacial", "IA y agentes", "Economía", "NLP", "Gestión pública"],
+    items: [
+      {
+        id: "puna",
+        title: "Puna quemada, año de Niño",
+        kicker: "Satélites · 25 años de incendios",
+        question:
+          "Si El Niño 2026-27 trae sequía al sur andino, ¿se recuperará el pajonal que ardió en 2026? ¿Qué distritos llegarán a la próxima temporada de fuego con menos pasto?",
+        result: { value: "≈ 3 400 ha", text: "de puna llegarían sin recuperarse a julio de 2027, casi el doble que con lluvia normal; 44 distritos son prioridad alta" },
+        summary: "Crucé 21 000 píxeles quemados de MODIS (2002-2025), focos VIIRS de 2026 y lluvia CHIRPS por temporada para estimar la recuperación del pajonal según la lluvia.",
+        image: "/images/projects/puna.webp",
+        imageAlt: "Mapa de distritos del sur andino coloreados según su prioridad",
+        position: "50% 40%",
+        tags: ["Geoespacial", "Economía"],
+        stack: ["Python", "MODIS · VIIRS", "CHIRPS", "SVG interactivo"],
+        links: [
+          { label: "Ver el reporte", href: "/demos/puna/", kind: "demo" },
+          { label: "Código", href: `${DSP}/claude/stoic-feynman-2cdwyz/tareas/14-puna-quemada-nino`, kind: "code" },
+        ],
+      },
+      {
+        id: "chichas",
+        title: "¿Cuánto se quemó en Chichas?",
+        kicker: "Sentinel-2 · NASA FIRMS",
+        question:
+          "¿Cuántas hectáreas ardieron en el distrito de Chichas (Condesuyos, Arequipa) en octubre de 2026, con qué severidad y sobre qué cobertura?",
+        result: { value: "82–258 ha", text: "quemadas dentro de la zona de 172 focos VIIRS: un rango honesto, que muestra cómo cambia la cifra según la fecha, las nubes y el umbral" },
+        summary: "Medí el dNBR con imágenes Sentinel-2 a 20 m, lo validé con los focos de calor de NASA FIRMS y armé un dashboard autocontenido con cada decisión del método.",
+        image: "/images/projects/chichas-dashboard.webp",
+        imageAlt: "Dashboard del incendio de Chichas con el área quemada y los focos de calor",
+        position: "0% 0%",
+        tags: ["Geoespacial"],
+        stack: ["Python", "rasterio", "Sentinel-2", "Leaflet", "Chart.js"],
+        links: [
+          { label: "Abrir dashboard", href: "/demos/chichas/", kind: "demo" },
+          { label: "Código", href: `${DSP}/tarea-07-raster-chichas-v2/tareas/07-raster-incendio-chichas`, kind: "code" },
+        ],
+      },
+      {
+        id: "tesis",
+        title: "El stock de capital humano del Perú, 1995–2030",
+        kicker: "Tesis · Jorgenson-Fraumeni",
+        question:
+          "¿Cuánto vale el ingreso laboral que los peruanos esperan ganar en su vida, y cómo cambió con la educación, la demografía y el COVID?",
+        result: { value: "S/ 11,4 billones", text: "en 2024 (soles de 2024). En 2020 el stock cayó 24,4 % y en 2024 seguía 7,8 % por debajo de 2019" },
+        summary: "Pipeline en Stata con ENAHO 2004-2024, tablas de vida del INEI y regresiones de Mincer por celda. Corregí 11 errores del pipeline original y añadí 8 controles automáticos de plausibilidad.",
+        image: "/images/projects/tesis.svg",
+        imageAlt: "Serie del stock de capital humano del Perú entre 1995 y 2030",
+        tags: ["Economía"],
+        stack: ["Stata", "ENAHO", "INEI", "Mincer"],
+        links: [],
+      },
+      {
+        id: "mcp-bcrp",
+        title: "Un MCP con las series oficiales del BCRP",
+        kicker: "Agentes de IA · Datos macro",
+        question:
+          "¿Le sirve a Claude un servidor propio con las 17 167 series del BCRP para responder cifras económicas recientes?",
+        result: { value: "0 → 10 de 10", text: "cifras oficiales correctas: de memoria no acierta ninguna, con búsqueda web 9 y con mi MCP las 10, en 14,7 s" },
+        summary: "Servidor FastMCP que busca, descarga y resume series del BCRP, con 8 pruebas contra datos reales y una evaluación automática con claude -p.",
+        image: "/images/projects/mcp-bcrp.webp",
+        imageAlt: "Gráfico de barras de aciertos de Claude según el modo de consulta",
+        fit: "contain",
+        tags: ["IA y agentes", "Economía"],
+        stack: ["Python", "FastMCP", "Claude Code", "pytest"],
+        links: [
+          { label: "Repositorio", href: `${GH}/mcp-bcrp`, kind: "code" },
+          { label: "Informe", href: `${GH}/mcp-bcrp/blob/main/informe.md`, kind: "doc" },
+        ],
+      },
+      {
+        id: "enaho",
+        title: "Skills de Claude Code para la ENAHO",
+        kicker: "Agentes de IA · Pobreza",
+        question:
+          "¿Puede un agente descargar, limpiar, graficar y mapear la ENAHO siempre de la misma forma y replicar la pobreza oficial?",
+        result: { value: "27,6 %", text: "de pobreza monetaria 2024, igual que el INEI, con 0,0 puntos de error en los 25 departamentos" },
+        summary: "Cuatro skills encadenadas: si a una le falta su insumo, llama a la anterior. Documenté por qué la base de hogares y la de personas necesitan pesos distintos.",
+        image: "/images/projects/enaho.webp",
+        imageAlt: "Mapa de pobreza monetaria por departamento en 2024",
+        fit: "contain",
+        tags: ["IA y agentes", "Economía", "Geoespacial"],
+        stack: ["Python", "Claude Code", "pandas", "GeoPandas"],
+        links: [{ label: "Repositorio", href: `${GH}/enaho-skills`, kind: "code" }],
+      },
+      {
+        id: "beto",
+        title: "Del titular al clasificador",
+        kicker: "NLP · Fine-tuning",
+        question: "¿Se puede entrenar un clasificador de noticias peruanas con pocos titulares y etiquetas generadas por un LLM?",
+        result: { value: "F1 0,914", text: "con BETO y solo 268 titulares, frente a 0,627 del zero-shot; el LLM etiquetador acertó 19 de 20 en la auditoría humana" },
+        summary: "Scraping ético de El Comercio por sitemaps, supervisión débil con Qwen 2.5-3B local, fine-tuning de BETO y un dashboard en Streamlit para clasificar titulares en vivo.",
+        image: "/images/projects/beto.svg",
+        imageAlt: "Barras con el F1 macro de tres métodos de clasificación",
+        tags: ["NLP", "IA y agentes"],
+        stack: ["Python", "Hugging Face", "BETO", "Qwen", "Streamlit"],
+        links: [{ label: "Código", href: `${GH}/Data-Science-Python-Tareas/tree/main/tarea_1`, kind: "code" }],
+      },
+      {
+        id: "voces",
+        title: "Voces y documentos peruanos",
+        kicker: "OCR · Voz · LLM local",
+        question: "¿Podemos convertir documentos escaneados y entrevistas en audio en un archivo de texto buscable?",
+        result: { value: "WER 0,26", text: "en audio y CER 0,36 en documentos; del 0,05 en impresos al 0,7 en manuscritos: el soporte pesa más que el modelo" },
+        summary: "Pipeline con modelos abiertos y locales: EasyOCR y PaddleOCR, faster-whisper con diarización, seudonimización y extracción de campos con Qwen 2.5-3B.",
+        image: "/images/projects/ocr.webp",
+        imageAlt: "Recorte de un documento histórico peruano usado en la evaluación de OCR",
+        tags: ["NLP", "IA y agentes"],
+        stack: ["Python", "EasyOCR", "faster-whisper", "Streamlit"],
+        links: [
+          { label: "Dashboard", href: "https://voces-documentos-faluna22.streamlit.app/", kind: "demo" },
+          { label: "Código", href: `${DSP}/main/tarea_2`, kind: "code" },
+        ],
+      },
+      {
+        id: "despacho",
+        title: "Seguimiento de casos en el despacho parlamentario",
+        kicker: "Gestión pública · Automatización",
+        question:
+          "¿Cómo asegurar que cada pedido de una municipalidad o de un ciudadano del Cusco llegue a la entidad correcta y reciba respuesta a tiempo?",
+        result: { value: "Cada caso", text: "con su oficio, su plazo y su estado a la vista: del ingreso por trámite documentario a la respuesta" },
+        summary: "Con Claude Code armé un sistema de trabajo: sumillas de los documentos que ingresan, oficios con membrete y control de plazos, informes de sesiones transcritas en vivo y un portal de seguimiento de casos.",
+        image: "/images/projects/despacho.svg",
+        imageAlt: "Diagrama del flujo de un caso: ingreso, sumilla, oficio, plazo y atención",
+        tags: ["Gestión pública", "IA y agentes"],
+        stack: ["Python", "Claude Code", "Whisper", "Google Drive"],
+        links: [],
+      },
+      {
+        id: "consultoria",
+        title: "Segmentación y diagnóstico de campo",
+        kicker: "Consultoría aplicada",
+        question: "¿Qué perfiles existen en la población objetivo y en qué se diferencia lo que declaran de lo que se observa en campo?",
+        result: { value: "4 perfiles", text: "accionables; el piloto de 100 observaciones se escaló a un censo en Lima Metropolitana" },
+        summary: "Diseñé una encuesta Likert con dimensiones ponderadas, la contrasté con observación directa y segmenté con k-means, validado con los cortes naturales de Jenks.",
+        image: "/images/projects/consultoria.svg",
+        imageAlt: "Ilustración de puntos agrupados en cuatro segmentos",
+        tags: ["Economía"],
+        stack: ["Python", "scikit-learn", "Encuestas", "Trabajo de campo"],
+        links: [],
+      },
+    ],
+  },
+  experience: {
+    title: "Experiencia",
+    items: [
+      {
+        title: "Asistente parlamentario",
+        org: "Despacho del diputado Edwin Espinoza Huillca · Cámara de Diputados del Perú",
+        place: "Cusco",
+        dateRange: "Ago 2026 – presente",
+        bullets: [
+          "Sistematizo y doy seguimiento a requerimientos de municipalidades, organizaciones y población del Cusco, y los traslado a las entidades competentes (p. ej. SENASA y el sector Salud).",
+          "Redacto pedidos de información (art. 159 del Reglamento) y oficios, con control de plazos y reiteraciones para que cada caso sea trazable hasta su atención.",
+          "Reviso, clasifico y sumillo los documentos que ingresan por el Sistema de Trámite Documentario para priorizarlos y derivarlos a tiempo.",
+          "Elaboro informes de sesiones, audiencias y mesas de trabajo, y sigo casos de interés regional como el del Hospital Antonio Lorena.",
+        ],
+      },
+      {
+        title: "Consultoría aplicada · Segmentación y diagnóstico de campo",
+        org: "Tercerización para Apoyo Consultoría",
+        dateRange: "Feb 2026 – jun 2026",
+        bullets: [
+          "Diseñé una encuesta de diagnóstico (Likert 1–5, dimensiones ponderadas) que contrastó lo declarado con lo observado en campo.",
+          "Segmenté con k-means, validado con Jenks natural breaks, y definí cuatro perfiles accionables. El piloto de 100 observaciones escaló a un censo en Lima Metropolitana.",
+        ],
+      },
+      {
+        title: "Practicante de ciencia de datos",
+        org: "QLAB PUCP · Laboratorio de IA y Métodos Computacionales en Ciencias Sociales",
+        dateRange: "Abr 2025 – jul 2026",
+        bullets: [
+          "Procesé y limpié bases del INEI, ENAHO, BCRP y SBS; construí indicadores socioeconómicos y automaticé rutinas en Python y Stata.",
+          "Apoyé evaluaciones de impacto, regresiones, modelos de machine learning y procesamiento de lenguaje natural en proyectos de políticas públicas.",
+        ],
+      },
+      {
+        title: "Director de Arte e Imagen",
+        org: "Económica PUCP · Asociación de estudiantes de Economía",
+        dateRange: "Ene 2026 – presente",
+        bullets: [
+          "Defino la línea visual y produzco materiales, reels y videopodcast para explicar temas económicos a públicos no especializados.",
+        ],
+      },
+    ],
+  },
+  education: {
+    title: "Formación",
+    items: [
+      {
+        degree: "Bachiller en Economía · Quinto superior",
+        school: "Pontificia Universidad Católica del Perú",
+        dateRange: "2020 – 2025",
+        details: [
+          "Tesis en curso: estimación del stock de capital humano del Perú con la metodología Jorgenson-Fraumeni, implementada en Stata.",
+          "Cursos: Econometría Intermedia, Organización Industrial, Teoría de la Regulación, Economía Monetaria, Análisis Financiero.",
+        ],
+      },
+      {
+        degree: "Cursos de posgrado (culminados)",
+        school: "Escuela de Posgrado PUCP",
+        dateRange: "Mar 2025 – jul 2025",
+        details: ["Crecimiento y Desarrollo Económico · Organización Industrial · Teoría de la Regulación."],
+      },
+    ],
+    certifications: [
+      "Análisis de Datos en Python · PUCP",
+      "Machine Learning y Ciencia de Datos aplicada a Economía · PUCP",
+    ],
+    achievements: ["Top 10 % de rendimiento histórico de la Facultad de Ciencias Sociales, especialidad Economía (PUCP)."],
+    languages: "Español nativo · Inglés B2",
+  },
+  beyond: {
+    title: "Más allá de los datos",
+    intro: "Lo que hago cuando no estoy frente a una base de datos, y que también explica cómo trabajo.",
+    items: [
+      {
+        title: "Diseño y comunicación visual",
+        text: "Dirijo la línea gráfica de Económica PUCP: piezas, camisetas y materiales que hacen la economía más cercana.",
+        icon: "palette",
+      },
+      {
+        title: "Audiovisual y videopodcast",
+        text: "Grabo y produzco reels y videopodcast con el equipo de Económica. Contar bien una idea en un minuto es un buen entrenamiento.",
+        icon: "mic",
+      },
+    ],
+  },
+};

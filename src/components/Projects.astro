@@ -1,0 +1,65 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import type { SiteContent } from "../data/types";
+
+interface Props {
+  t: SiteContent;
+}
+
+const { t } = Astro.props;
+const { projects } = t;
+---
+
+<section id="projects" class="section bg-[var(--bg-alt)]">
+  <div class="container-x">
+    <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-5">
+        <p class="eyebrow">02</p>
+        <h2 class="section-title">{projects.title}</h2>
+      </div>
+      <p class="lead m-0 lg:col-span-7">{projects.intro}</p>
+    </div>
+
+    <div class="filters mt-10 flex flex-wrap gap-2" role="group" aria-label={projects.title}>
+      <button type="button" class="filter" aria-pressed="true" data-filter="*">{t.ui.all}</button>
+      {projects.filters.map((f) => (
+        <button type="button" class="filter" aria-pressed="false" data-filter={f}>{f}</button>
+      ))}
+    </div>
+
+    <div id="project-grid" class="mt-8 grid gap-6 md:grid-cols-2 lg:gap-8">
+      {projects.items.map((p, i) => <ProjectCard p={p} t={t} index={i} wide={i === 0} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .filter {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .filter:hover { border-color: var(--accent); color: var(--ink); }
+  .filter[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  :global(#project-grid > [hidden]) { display: none !important; }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".filter");
+  const cards = document.querySelectorAll<HTMLElement>("#project-grid > article");
+  buttons.forEach((b) =>
+    b.addEventListener("click", () => {
+      const f = b.dataset.filter!;
+      buttons.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      cards.forEach((c) => {
+        c.hidden = f !== "*" && !(c.dataset.tags ?? "").split("|").includes(f);
+      });
+    }),
+  );
+</script>

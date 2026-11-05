@@ -1,0 +1,31 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "./Header.astro";
+import Hero from "./Hero.astro";
+import About from "./About.astro";
+import Projects from "./Projects.astro";
+import Experience from "./Experience.astro";
+import Education from "./Education.astro";
+import Beyond from "./Beyond.astro";
+import Footer from "./Footer.astro";
+import type { SiteContent } from "../data/types";
+
+interface Props {
+  t: SiteContent;
+}
+
+const { t } = Astro.props;
+---
+
+<Base t={t}>
+  <Header t={t} />
+  <main id="main">
+    <Hero t={t} />
+    <About t={t} />
+    <Projects t={t} />
+    <Experience t={t} />
+    <Education t={t} />
+    <Beyond t={t} />
+  </main>
+  <Footer t={t} />
+</Base>

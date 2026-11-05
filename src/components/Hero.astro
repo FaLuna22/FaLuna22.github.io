@@ -1,0 +1,156 @@
+---
+import Icon from "./Icon.astro";
+import type { SiteContent } from "../data/types";
+
+interface Props {
+  t: SiteContent;
+}
+
+const { t } = Astro.props;
+const { person } = t;
+---
+
+<section id="top" class="relative isolate overflow-hidden">
+  <div class="grid-bg absolute inset-0 -z-10" aria-hidden="true"></div>
+  <div class="glow absolute -z-10" aria-hidden="true"></div>
+
+  <div class="container-x grid items-center gap-12 pt-14 pb-16 md:pt-20 lg:grid-cols-12 lg:gap-10 lg:pt-28 lg:pb-24">
+    <div class="lg:col-span-7">
+      <p class="eyebrow fade">{person.role}</p>
+      <h1 class="fade d1 mt-4 text-[clamp(2.4rem,7vw,4.6rem)] font-bold leading-[1.03] tracking-[-0.035em]">
+        {person.name.split(" ").slice(0, 2).join(" ")}
+        <span class="accent block">{person.name.split(" ").slice(2).join(" ")}</span>
+      </h1>
+      <p class="lead fade d2 mt-6 text-[1.1rem] sm:text-[1.2rem]">{person.tagline}</p>
+
+      <div class="fade d3 mt-8 flex flex-wrap gap-3">
+        <a href="#projects" class="btn btn-primary">
+          {t.ui.viewProjects}
+          <Icon name="arrowDown" size={16} />
+        </a>
+        <a href={person.cv} class="btn" download>
+          <Icon name="download" size={16} />
+          {t.ui.downloadCv}
+        </a>
+      </div>
+
+      <div class="fade d4 mt-8 flex items-center gap-2.5">
+        <a class="icon-link" href={`mailto:${person.email}`} aria-label="Email"><Icon name="mail" /></a>
+        <a class="icon-link" href={person.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+        <a class="icon-link" href={person.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="github" /></a>
+        <span class="mono ml-2 inline-flex items-center gap-1.5 text-sm text-[var(--mute)]">
+          <Icon name="pin" size={16} />{person.location}
+        </span>
+      </div>
+    </div>
+
+    <div class="fade d2 lg:col-span-5">
+      <div class="portrait mx-auto">
+        {
+          person.photo ? (
+            <img src={person.photo} alt={person.name} width="480" height="560" class="h-full w-full object-cover" />
+          ) : (
+            <div class="monogram" aria-hidden="true">
+              <span>{person.initials}</span>
+            </div>
+          )
+        }
+        <div class="badge card mono">
+          <span class="dot"></span>
+          Python · Stata · SQL
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-x pb-16 lg:pb-24">
+    <dl class="highlights grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-[var(--rule)] bg-[var(--rule)] sm:grid-cols-3">
+      {t.highlights.map((h) => (
+        <div class="bg-[var(--surface)] px-5 py-5">
+          <dt class="mono text-2xl font-semibold tracking-tight text-[var(--accent)] sm:text-[1.7rem]">{h.value}</dt>
+          <dd class="m-0 mt-1 text-sm text-[var(--ink-2)]">{h.label}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .accent { color: var(--accent); }
+  .glow {
+    top: -20%;
+    left: -10%;
+    width: 70vw;
+    height: 70vw;
+    max-width: 900px;
+    max-height: 900px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 16%, transparent) 0%, transparent 65%);
+    filter: blur(10px);
+  }
+  .portrait {
+    position: relative;
+    width: min(78%, 380px);
+    aspect-ratio: 6 / 7;
+    border-radius: 28px;
+    overflow: visible;
+  }
+  .portrait > img,
+  .portrait > .monogram {
+    border-radius: 28px;
+    border: 1px solid var(--rule);
+    box-shadow: var(--shadow);
+  }
+  .portrait::before {
+    content: "";
+    position: absolute;
+    inset: 18px -18px -18px 18px;
+    border-radius: 28px;
+    border: 2px solid var(--accent);
+    opacity: 0.35;
+    z-index: -1;
+  }
+  .monogram {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%),
+      linear-gradient(160deg, var(--surface), var(--bg-alt));
+  }
+  .monogram span {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(5rem, 16vw, 8rem);
+    letter-spacing: -0.06em;
+    color: var(--accent);
+    opacity: 0.9;
+  }
+  .badge {
+    position: absolute;
+    left: -12px;
+    bottom: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.8rem;
+    border-radius: 12px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #16a34a;
+    box-shadow: 0 0 0 4px color-mix(in srgb, #16a34a 20%, transparent);
+  }
+  .fade { animation: fadeUp 0.7s ease-out both; }
+  .d1 { animation-delay: 0.08s; }
+  .d2 { animation-delay: 0.16s; }
+  .d3 { animation-delay: 0.24s; }
+  .d4 { animation-delay: 0.32s; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+import Icon from "./Icon.astro";
+import type { SiteContent } from "../data/types";
+
+interface Props {
+  t: SiteContent;
+}
+
+const { t } = Astro.props;
+const e = t.education;
+---
+
+<section id="education" class="section bg-[var(--bg-alt)]">
+  <div class="container-x grid gap-10 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-4">
+      <p class="eyebrow">04</p>
+      <h2 class="section-title">{e.title}</h2>
+    </div>
+    <div class="space-y-6 lg:col-span-8">
+      {e.items.map((s) => (
+        <div class="card p-5 sm:p-6">
+          <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+            <h3 class="m-0 text-lg font-semibold leading-snug">{s.degree}</h3>
+            <span class="mono shrink-0 text-xs text-[var(--mute)] sm:text-sm">{s.dateRange}</span>
+          </div>
+          <p class="m-0 mt-1 font-medium text-[var(--accent)]">{s.school}</p>
+          <ul class="m-0 mt-3 space-y-2 pl-5 list-disc marker:text-[var(--accent)] text-[0.97rem] text-[var(--ink-2)]">
+            {s.details.map((d) => <li>{d}</li>)}
+          </ul>
+        </div>
+      ))}
+
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="card p-5 sm:p-6">
+          <h3 class="m-0 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.1em] text-[var(--accent)]">
+            <Icon name="award" size={18} />{t.ui.certifications}
+          </h3>
+          <ul class="m-0 mt-3 space-y-2 pl-5 list-disc marker:text-[var(--accent)] text-[0.95rem] text-[var(--ink-2)]">
+            {e.certifications.map((c) => <li>{c}</li>)}
+          </ul>
+        </div>
+        <div class="card p-5 sm:p-6">
+          <h3 class="m-0 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.1em] text-[var(--accent)]">
+            <Icon name="chart" size={18} />{t.ui.achievements}
+          </h3>
+          <ul class="m-0 mt-3 space-y-2 pl-5 list-disc marker:text-[var(--accent)] text-[0.95rem] text-[var(--ink-2)]">
+            {e.achievements.map((a) => <li>{a}</li>)}
+          </ul>
+          <h3 class="m-0 mt-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.1em] text-[var(--accent)]">
+            <Icon name="language" size={18} />{t.ui.languages}
+          </h3>
+          <p class="m-0 mt-2 text-[0.95rem] text-[var(--ink-2)]">{e.languages}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,264 @@
+import type { SiteContent } from "./types";
+import { es } from "./es";
+
+const GH = "https://github.com/FaLuna22";
+const p = Object.fromEntries(es.projects.items.map((x) => [x.id, x]));
+
+export const en: SiteContent = {
+  lang: "en",
+  meta: {
+    title: "Fabricio Luna Palacios · Economist and data scientist",
+    description:
+      "PUCP economist. I use open data, satellites and AI to answer public-policy questions in Peru: poverty, human capital, wildfires in the Andes and more.",
+  },
+  nav: {
+    about: "About",
+    projects: "Projects",
+    experience: "Experience",
+    education: "Education",
+    beyond: "Beyond",
+    contact: "Contact",
+  },
+  ui: {
+    switchLang: "ES",
+    switchLangHref: "/",
+    themeToggle: "Toggle light or dark theme",
+    menu: "Menu",
+    viewProjects: "See projects",
+    downloadCv: "Download CV (ES)",
+    question: "Question",
+    result: "Result",
+    all: "All",
+    skills: "Tools",
+    certifications: "Certificates",
+    achievements: "Achievements",
+    languages: "Languages",
+    contactTitle: "Let's talk",
+    contactText:
+      "I'm looking for teams that use data to make better public decisions: social policy, regulation, mining and regional development. Write to me and I'll get back to you soon.",
+    writeMe: "Email me",
+    rights: "All rights reserved.",
+    built: "Built with Astro, hosted on GitHub Pages.",
+  },
+  person: {
+    ...es.person,
+    role: "Economist · Data science for public policy",
+    location: "Lima, Peru",
+    tagline:
+      "I turn surveys, satellite imagery and public documents into clear answers for better decisions. BA in Economics from PUCP, top fifth of my class.",
+  },
+  highlights: [
+    { value: "Top 10 %", label: "All-time ranking, Economics at PUCP" },
+    { value: "27.6 %", label: "Official poverty rate replicated from ENAHO" },
+    { value: "10 / 10", label: "Central-bank figures right with my MCP" },
+  ],
+  about: {
+    title: "About me",
+    paragraphs: [
+      "I'm an economist from PUCP working where applied economics meets data science. I care about numbers that don't get stuck in a spreadsheet: they should reach decision-makers clean, validated and well explained.",
+      "I currently work as a parliamentary assistant in Peru's Chamber of Deputies, following up on requests from municipalities and citizens of Cusco before state agencies. Before that I was a data-science intern at QLAB PUCP and worked on a segmentation project with fieldwork in Metropolitan Lima.",
+      "My thesis estimates Peru's human-capital stock with the Jorgenson-Fraumeni method. In parallel I build AI-agent tools (Claude Code, MCP) to make analysis reproducible. I'm especially interested in monitoring social commitments in the mining sector.",
+    ],
+    skillGroups: [
+      { name: "Analysis", items: ["Econometrics", "Impact evaluation", "Surveys & fieldwork", "ENAHO · INEI · BCRP · SBS"] },
+      { name: "Machine learning & AI", items: ["scikit-learn", "Fine-tuning (BETO)", "Local LLMs", "Claude Code · MCP", "OCR & Whisper"] },
+      { name: "Geospatial", items: ["GeoPandas", "Sentinel-2 · MODIS", "NASA FIRMS", "Folium · Leaflet"] },
+      { name: "Tools", items: ["Python", "Stata", "SQL", "Power BI", "Excel (macros)", "Streamlit", "Git & GitHub"] },
+    ],
+  },
+  projects: {
+    title: "Projects",
+    intro: "Each project answers a concrete question with open data, and the code is one click away. The ones I'm proudest of come first.",
+    filters: ["Geospatial", "AI & agents", "Economics", "NLP", "Public sector"],
+    items: [
+      {
+        ...p.puna,
+        title: "Burned puna in an El Niño year",
+        kicker: "Satellites · 25 years of fires",
+        question:
+          "If the 2026-27 El Niño brings drought to the southern Andes, will the grassland that burned in 2026 recover? Which districts will reach the next fire season with less pasture?",
+        result: { value: "≈ 3,400 ha", text: "of puna would still be unrecovered by July 2027, almost twice as much as with normal rain; 44 districts are high priority" },
+        summary: "I combined 21,000 burned MODIS pixels (2002-2025), 2026 VIIRS hotspots and seasonal CHIRPS rainfall to estimate grassland recovery by rainfall.",
+        imageAlt: "Map of southern Andean districts colored by priority",
+        tags: ["Geospatial", "Economics"],
+        stack: ["Python", "MODIS · VIIRS", "CHIRPS", "Interactive SVG"],
+        links: [
+          { label: "Read the report (ES)", href: "/demos/puna/", kind: "demo" },
+          { label: "Code", href: p.puna.links[1].href, kind: "code" },
+        ],
+      },
+      {
+        ...p.chichas,
+        title: "How much burned in Chichas?",
+        question: "How many hectares burned in the district of Chichas (Condesuyos, Arequipa) in October 2026, how severely, and over what land cover?",
+        result: { value: "82–258 ha", text: "burned inside the zone of 172 VIIRS hotspots: an honest range that shows how the figure moves with date, clouds and threshold" },
+        summary: "I measured dNBR from 20 m Sentinel-2 imagery, validated it with NASA FIRMS hotspots, and built a self-contained dashboard that shows every methodological choice.",
+        imageAlt: "Dashboard of the Chichas wildfire with burned area and hotspots",
+        tags: ["Geospatial"],
+        links: [
+          { label: "Open dashboard (ES)", href: "/demos/chichas/", kind: "demo" },
+          { label: "Code", href: p.chichas.links[1].href, kind: "code" },
+        ],
+      },
+      {
+        ...p.tesis,
+        title: "Peru's human-capital stock, 1995–2030",
+        kicker: "Thesis · Jorgenson-Fraumeni",
+        question: "What is the lifetime labor income Peruvians expect to earn worth, and how did it change with education, demographics and COVID?",
+        result: { value: "S/ 11.4 trillion", text: "in 2024 (2024 soles). The stock fell 24.4 % in 2020 and in 2024 was still 7.8 % below 2019" },
+        summary: "A Stata pipeline using ENAHO 2004-2024, INEI life tables and cell-level Mincer regressions. I fixed 11 bugs in the original pipeline and added 8 automatic plausibility checks.",
+        image: "/images/projects/tesis-en.svg",
+        imageAlt: "Peru's human-capital stock series from 1995 to 2030",
+        tags: ["Economics"],
+      },
+      {
+        ...p["mcp-bcrp"],
+        title: "An MCP server for Peru's central-bank data",
+        kicker: "AI agents · Macro data",
+        question: "Does Claude get better at recent economic figures with its own server over the 17,167 series of Peru's central bank (BCRP)?",
+        result: { value: "0 → 10 of 10", text: "official figures right: none from memory, 9 with web search and all 10 with my MCP, in 14.7 s" },
+        summary: "A FastMCP server that searches, downloads and summarizes BCRP series, with 8 tests against live data and an automated evaluation using claude -p.",
+        imageAlt: "Bar chart of Claude's correct answers by mode",
+        tags: ["AI & agents", "Economics"],
+        links: [
+          { label: "Repository", href: `${GH}/mcp-bcrp`, kind: "code" },
+          { label: "Report (ES)", href: `${GH}/mcp-bcrp/blob/main/informe.md`, kind: "doc" },
+        ],
+      },
+      {
+        ...p.enaho,
+        title: "Claude Code skills for Peru's household survey",
+        kicker: "AI agents · Poverty",
+        question: "Can an agent download, clean, chart and map the ENAHO the same way every time and replicate official poverty?",
+        result: { value: "27.6 %", text: "monetary poverty in 2024, matching INEI, with 0.0 points of error across all 25 departments" },
+        summary: "Four chained skills: when one is missing its input, it calls the previous one. I documented why household and person files need different weights.",
+        imageAlt: "Map of monetary poverty by department in 2024",
+        tags: ["AI & agents", "Economics", "Geospatial"],
+        links: [{ label: "Repository", href: `${GH}/enaho-skills`, kind: "code" }],
+      },
+      {
+        ...p.beto,
+        title: "From headline to classifier",
+        question: "Can you train a Peruvian news classifier with few headlines and LLM-generated labels?",
+        result: { value: "F1 0.914", text: "with BETO and only 268 headlines, versus 0.627 zero-shot; the labeling LLM got 19 of 20 right in a human audit" },
+        summary: "Ethical scraping of El Comercio via sitemaps, weak supervision with a local Qwen 2.5-3B, BETO fine-tuning and a Streamlit dashboard to classify headlines live.",
+        image: "/images/projects/beto-en.svg",
+        imageAlt: "Macro F1 of three classification approaches",
+        tags: ["NLP", "AI & agents"],
+        links: [{ label: "Code", href: p.beto.links[0].href, kind: "code" }],
+      },
+      {
+        ...p.voces,
+        title: "Peruvian voices and documents",
+        kicker: "OCR · Speech · Local LLM",
+        question: "Can scanned documents and recorded interviews become a structured, searchable text archive?",
+        result: { value: "WER 0.26", text: "on audio and CER 0.36 on documents; from 0.05 on print to 0.7 on manuscripts: the medium matters more than the model" },
+        summary: "An open, local pipeline: EasyOCR and PaddleOCR, faster-whisper with diarization, pseudonymization and field extraction with Qwen 2.5-3B.",
+        imageAlt: "Crop of a historical Peruvian document used in the OCR evaluation",
+        tags: ["NLP", "AI & agents"],
+        links: [
+          { label: "Dashboard", href: p.voces.links[0].href, kind: "demo" },
+          { label: "Code", href: p.voces.links[1].href, kind: "code" },
+        ],
+      },
+      {
+        ...p.despacho,
+        title: "Case tracking in a congressional office",
+        kicker: "Public sector · Automation",
+        question: "How do you make sure every request from a Cusco municipality or citizen reaches the right agency and gets an answer on time?",
+        result: { value: "Every case", text: "with its official letter, deadline and status in view: from intake through the document system to the agency's reply" },
+        summary: "With Claude Code I built a working system: summaries of incoming documents, letterhead letters with deadline tracking, reports from live-transcribed hearings and a case-tracking portal.",
+        image: "/images/projects/despacho-en.svg",
+        imageAlt: "Flow of a case: intake, summary, letter, deadline and reply",
+        tags: ["Public sector", "AI & agents"],
+      },
+      {
+        ...p.consultoria,
+        title: "Segmentation and field diagnosis",
+        kicker: "Applied consulting",
+        question: "Which profiles exist in the target population, and how does what people report differ from what is observed in the field?",
+        result: { value: "4 profiles", text: "ready to act on; the 100-observation pilot scaled up to a census in Metropolitan Lima" },
+        summary: "I designed a weighted Likert survey, contrasted it with direct observation and segmented with k-means, validated against Jenks natural breaks.",
+        image: "/images/projects/consultoria-en.svg",
+        imageAlt: "Illustration of points grouped into four segments",
+        tags: ["Economics"],
+        stack: ["Python", "scikit-learn", "Surveys", "Fieldwork"],
+      },
+    ],
+  },
+  experience: {
+    title: "Experience",
+    items: [
+      {
+        title: "Parliamentary assistant",
+        org: "Office of Deputy Edwin Espinoza Huillca · Peru's Chamber of Deputies",
+        place: "Cusco",
+        dateRange: "Aug 2026 – present",
+        bullets: [
+          "Log and follow up on requests from municipalities, organizations and citizens of Cusco, and forward them to the competent agencies (e.g. SENASA and the health sector).",
+          "Draft information requests (art. 159 of the Rules) and official letters, tracking deadlines and reminders so every case is traceable until resolved.",
+          "Review, classify and summarize documents entering through the document-management system to prioritize and route them on time.",
+          "Write reports on hearings, sessions and working groups, and follow regional cases such as the Antonio Lorena Hospital.",
+        ],
+      },
+      {
+        title: "Applied consulting · Segmentation and field diagnosis",
+        org: "Tercerización para Apoyo Consultoría (outsourcing)",
+        dateRange: "Feb 2026 – Jun 2026",
+        bullets: [
+          "Designed a diagnostic survey (1–5 Likert, weighted dimensions) that contrasted stated answers with field observation.",
+          "Segmented with k-means, validated against Jenks natural breaks, into four actionable profiles. The 100-observation pilot scaled to a census in Metropolitan Lima.",
+        ],
+      },
+      {
+        title: "Data science intern",
+        org: "QLAB PUCP · AI & Computational Methods in Social Sciences Lab",
+        dateRange: "Apr 2025 – Jul 2026",
+        bullets: [
+          "Processed and cleaned INEI, ENAHO, BCRP and SBS data; built socioeconomic indicators and automated routines in Python and Stata.",
+          "Supported impact evaluations, regressions, machine-learning and NLP work on public-policy projects.",
+        ],
+      },
+      {
+        title: "Art & Design Director",
+        org: "Económica PUCP · Economics student association",
+        dateRange: "Jan 2026 – present",
+        bullets: ["Set the visual line and produce materials, reels and a video podcast that explain economics to non-specialist audiences."],
+      },
+    ],
+  },
+  education: {
+    title: "Education",
+    items: [
+      {
+        degree: "BA in Economics · Top fifth of class",
+        school: "Pontifical Catholic University of Peru (PUCP)",
+        dateRange: "2020 – 2025",
+        details: [
+          "Thesis in progress: estimating Peru's human-capital stock with the Jorgenson-Fraumeni method, implemented in Stata.",
+          "Courses: Intermediate Econometrics, Industrial Organization, Regulation Theory, Monetary Economics, Financial Analysis.",
+        ],
+      },
+      {
+        degree: "Graduate courses (completed)",
+        school: "PUCP Graduate School",
+        dateRange: "Mar 2025 – Jul 2025",
+        details: ["Economic Growth and Development · Industrial Organization · Regulation Theory."],
+      },
+    ],
+    certifications: [
+      "Data Analysis in Python · PUCP",
+      "Machine Learning and Data Science for Economics · PUCP",
+    ],
+    achievements: ["Top 10 % all-time performance, Faculty of Social Sciences, Economics (PUCP)."],
+    languages: "Spanish (native) · English (B2)",
+  },
+  beyond: {
+    title: "Beyond data",
+    intro: "What I do away from a dataset, which also says something about how I work.",
+    items: [
+      { title: "Design and visual communication", text: "I lead the visual identity of Económica PUCP: posts, T-shirts and materials that make economics feel closer.", icon: "palette" },
+      { title: "Video and podcasting", text: "I shoot and produce reels and a video podcast with the Económica team. Explaining one idea well in a minute is great practice.", icon: "mic" },
+    ],
+  },
+};

@@ -1,0 +1,57 @@
+---
+import Icon from "./Icon.astro";
+import type { SiteContent } from "../data/types";
+
+interface Props {
+  t: SiteContent;
+}
+
+const { t } = Astro.props;
+const { person } = t;
+---
+
+<section id="contact" class="section">
+  <div class="container-x">
+    <div class="cta relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-16">
+      <p class="eyebrow !text-[var(--accent-ink)] opacity-80">06</p>
+      <h2 class="m-0 mt-2 text-[clamp(2rem,5vw,3.4rem)] font-bold leading-tight tracking-tight">{t.ui.contactTitle}</h2>
+      <p class="m-0 mt-4 max-w-[58ch] text-[1.05rem] opacity-90 sm:text-lg">{t.ui.contactText}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={`mailto:${person.email}`} class="btn cta-btn">
+          <Icon name="mail" size={18} />{t.ui.writeMe}
+        </a>
+        <a href={person.linkedin} target="_blank" rel="noopener noreferrer" class="btn cta-ghost">
+          <Icon name="linkedin" size={18} />LinkedIn
+        </a>
+        <a href={person.cv} download class="btn cta-ghost">
+          <Icon name="download" size={18} />{t.ui.downloadCv}
+        </a>
+      </div>
+      <p class="mono m-0 mt-6 text-sm opacity-80">{person.email}</p>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-[var(--rule)]">
+  <div class="container-x flex flex-col gap-4 py-8 text-sm text-[var(--mute)] sm:flex-row sm:items-center sm:justify-between">
+    <p class="m-0">© {new Date().getFullYear()} {person.name}. {t.ui.rights}</p>
+    <div class="flex items-center gap-2">
+      <a class="icon-link" href={`mailto:${person.email}`} aria-label="Email"><Icon name="mail" size={18} /></a>
+      <a class="icon-link" href={person.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" size={18} /></a>
+      <a class="icon-link" href={person.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="github" size={18} /></a>
+    </div>
+    <p class="m-0 mono text-xs">{t.ui.built}</p>
+  </div>
+</footer>
+
+<style>
+  .cta {
+    background:
+      radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.16), transparent 45%),
+      var(--accent);
+    color: var(--accent-ink);
+  }
+  .cta-btn { background: var(--accent-ink); color: var(--accent); border-color: transparent; }
+  .cta-ghost { background: transparent; color: var(--accent-ink); border-color: color-mix(in srgb, var(--accent-ink) 45%, transparent); }
+  .cta-ghost:hover { border-color: var(--accent-ink); }
+</style>

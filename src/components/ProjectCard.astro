@@ -1,0 +1,117 @@
+---
+import Icon from "./Icon.astro";
+import type { Project, SiteContent } from "../data/types";
+
+interface Props {
+  p: Project;
+  t: SiteContent;
+  index: number;
+  wide?: boolean;
+}
+
+const { p, t, index, wide = false } = Astro.props;
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+const num = String(index + 1).padStart(2, "0");
+---
+
+<article class:list={["project card", { wide }]} data-tags={p.tags.join("|")} id={`p-${p.id}`}>
+  <div class:list={["media", p.fit === "contain" ? "contain" : "cover"]}>
+    <img
+      src={p.image}
+      alt={p.imageAlt}
+      loading={index < 2 ? "eager" : "lazy"}
+      decoding="async"
+      style={p.position ? `object-position:${p.position}` : undefined}
+    />
+  </div>
+
+  <div class="body">
+    <div class="flex items-center justify-between gap-3">
+      <span class="mono text-xs text-[var(--accent)]">{num} · {p.kicker}</span>
+    </div>
+    <h3 class="m-0 mt-2 text-xl font-semibold leading-snug tracking-tight sm:text-[1.35rem]">{p.title}</h3>
+
+    <p class="m-0 mt-3 text-[0.97rem] text-[var(--ink-2)]">
+      <span class="label">{t.ui.question}</span>
+      {p.question}
+    </p>
+
+    <div class="result mt-4">
+      <span class="label">{t.ui.result}</span>
+      <p class="m-0">
+        <strong class="mono value">{p.result.value}</strong>
+        <span class="text-[0.95rem] text-[var(--ink-2)]"> {p.result.text}</span>
+      </p>
+    </div>
+
+    {wide && <p class="m-0 mt-4 text-[0.95rem] text-[var(--mute)]">{p.summary}</p>}
+
+    <ul class="m-0 mt-4 flex list-none flex-wrap gap-1.5 p-0">
+      {p.stack.map((s) => <li class="chip">{s}</li>)}
+    </ul>
+
+    {
+      p.links.length > 0 && (
+        <div class="mt-5 flex flex-wrap gap-2">
+          {p.links.map((l, i) => (
+            <a
+              href={l.href}
+              class:list={["btn !py-2 !px-3 !text-[0.82rem]", { "btn-primary": i === 0 && l.kind === "demo" }]}
+              {...(isExternal(l.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              <Icon name={l.kind ?? "external"} size={15} />
+              {l.label}
+              {isExternal(l.href) && <Icon name="external" size={13} class="opacity-60" />}
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .project {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .project:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); }
+  .media {
+    aspect-ratio: 16 / 10;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .media img { width: 100%; height: 100%; transition: transform 0.4s ease; }
+  .project:hover .media img { transform: scale(1.025); }
+  .media.cover img { object-fit: cover; }
+  .media.contain { background: #fff; }
+  .media.contain img { object-fit: contain; padding: 0.75rem; }
+  .body { padding: 1.25rem 1.25rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
+  @media (min-width: 640px) { .body { padding: 1.5rem 1.6rem 1.7rem; } }
+  .label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-bottom: 0.2rem;
+  }
+  .result {
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+  }
+  .value { color: var(--accent); font-size: 1.2rem; letter-spacing: -0.01em; }
+  @media (min-width: 1024px) {
+    .wide { flex-direction: row; grid-column: 1 / -1; }
+    .wide .media { flex: 0 0 52%; aspect-ratio: auto; min-height: 100%; border-bottom: 0; border-right: 1px solid var(--rule); }
+    .wide .body { padding: 2.2rem 2.4rem; justify-content: center; }
+    .wide h3 { font-size: 1.75rem; }
+    .wide .value { font-size: 1.5rem; }
+  }
+</style>

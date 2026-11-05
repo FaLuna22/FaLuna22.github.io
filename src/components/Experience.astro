@@ -1,0 +1,74 @@
+---
+import type { SiteContent } from "../data/types";
+
+interface Props {
+  t: SiteContent;
+}
+
+const { t } = Astro.props;
+---
+
+<section id="experience" class="section">
+  <div class="container-x grid gap-10 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-4">
+      <p class="eyebrow">03</p>
+      <h2 class="section-title">{t.experience.title}</h2>
+    </div>
+    <ol class="timeline m-0 list-none p-0 lg:col-span-8">
+      {t.experience.items.map((r) => (
+        <li class="relative pb-10 pl-8 last:pb-0">
+          <span class="node" aria-hidden="true" />
+          <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+            <h3 class="m-0 text-lg font-semibold leading-snug sm:text-xl">{r.title}</h3>
+            <span class="mono shrink-0 text-xs text-[var(--mute)] sm:text-sm">{r.dateRange}</span>
+          </div>
+          <p class="m-0 mt-1 text-[0.98rem] font-medium text-[var(--accent)]">
+            {r.org}{r.place && <span class="text-[var(--mute)]"> · {r.place}</span>}
+          </p>
+          <ul class="m-0 mt-3 space-y-2 p-0">
+            {r.bullets.map((b) => (
+              <li class="bullet text-[0.97rem] text-[var(--ink-2)]">{b}</li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline > li::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 0.6rem;
+    bottom: -0.2rem;
+    width: 2px;
+    background: var(--rule);
+  }
+  .timeline > li:last-child::before { display: none; }
+  .node {
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--bg);
+    border: 3px solid var(--accent);
+  }
+  .bullet {
+    list-style: none;
+    position: relative;
+    padding-left: 1.1rem;
+  }
+  .bullet::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 6px;
+    height: 2px;
+    background: var(--mute);
+  }
+</style>
