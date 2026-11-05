@@ -28,7 +28,7 @@ const { projects } = t;
     </div>
 
     <div id="project-grid" class="mt-8 grid gap-6 md:grid-cols-2 lg:gap-8">
-      {projects.items.map((p, i) => <ProjectCard p={p} t={t} index={i} wide={i === 0} />)}
+      {projects.items.map((p, i, all) => <ProjectCard p={p} t={t} index={i} wide={i === 0 || (i === all.length - 1 && all.length % 2 === 0)} />)}
     </div>
   </div>
 </section>

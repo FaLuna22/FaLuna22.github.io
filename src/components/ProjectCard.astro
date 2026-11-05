@@ -88,6 +88,8 @@ const num = String(index + 1).padStart(2, "0");
   .project:hover .media img { transform: scale(1.025); }
   .media.cover img { object-fit: cover; }
   .media.contain { background: #fff; }
+  .media.contain:has(img[src$=".svg"]) { background: #faf8f5; }
+  .media.contain img[src$=".svg"] { padding: 0; }
   .media.contain img { object-fit: contain; padding: 0.75rem; }
   .body { padding: 1.25rem 1.25rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
   @media (min-width: 640px) { .body { padding: 1.5rem 1.6rem 1.7rem; } }
