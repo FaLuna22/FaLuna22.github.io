@@ -345,6 +345,8 @@ export const es: SiteContent = {
         detail: "1 pelea oficial ganada",
         text: "Boxeador acreditado por la Academia Tito Montes de Cusco.",
         icon: "boxing",
+        image: "/images/life/boxeo-medalla.webp",
+        imageAlt: "Medalla de boxeo de Fabricio",
       },
       {
         title: "Downhill",
@@ -371,6 +373,8 @@ export const es: SiteContent = {
         title: "Canto, poesía y dibujo",
         text: "Mi lado creativo: canto, escribo poesía y dibujo.",
         icon: "pencil",
+        image: "/images/life/boceto.webp",
+        imageAlt: "Boceto a tinta de Fabricio: un retrato con sombreado cruzado",
       },
       {
         title: "Diseño y videopodcast",
