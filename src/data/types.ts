@@ -40,7 +40,17 @@ export interface Study {
 export interface Hobby {
   title: string;
   text: string;
-  icon: "palette" | "mic" | "chart" | "mountain" | "book" | "ball";
+  icon: "palette" | "mic" | "chart" | "mountain" | "book" | "ball" | "boxing" | "target" | "bike" | "wave" | "pencil";
+  detail?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+export interface Photo {
+  src: string;
+  alt: string;
+  caption: string;
+  position?: string;
 }
 
 export interface SiteContent {
@@ -90,5 +100,5 @@ export interface SiteContent {
     achievements: string[];
     languages: string;
   };
-  beyond: { title: string; intro: string; items: Hobby[] };
+  beyond: { title: string; intro: string; items: Hobby[]; galleryTitle: string; gallery: Photo[] };
 }

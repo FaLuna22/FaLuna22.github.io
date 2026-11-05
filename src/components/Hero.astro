@@ -48,7 +48,7 @@ const { person } = t;
       <div class="portrait mx-auto">
         {
           person.photo ? (
-            <img src={person.photo} alt={person.name} width="480" height="560" class="h-full w-full object-cover" />
+            <img src={person.photo} alt={person.name} width="480" height="560" class="h-full w-full object-cover" style="object-position:50% 25%" fetchpriority="high" />
           ) : (
             <div class="monogram" aria-hidden="true">
               <span>{person.initials}</span>
