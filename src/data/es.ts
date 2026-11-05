@@ -333,26 +333,32 @@ export const es: SiteContent = {
     intro: "Lo que hago cuando no estoy frente a una base de datos: deporte, montaña, mar y un lado creativo.",
     items: [
       {
+        title: "Tiro con carabina",
+        detail: "Podio · Juegos Interfacultades PUCP 2026",
+        text: "Con mi equipo terminamos en el podio de tiro con carabina en los Juegos Interfacultades 2026.",
+        icon: "target",
+        image: "/images/life/tiro.webp",
+        imageAlt: "Fabricio apunta con una carabina de aire en la línea de tiro",
+      },
+      {
         title: "Boxeo amateur",
         detail: "1 pelea oficial ganada",
         text: "Boxeador acreditado por la Academia Tito Montes de Cusco.",
         icon: "boxing",
       },
       {
-        title: "Tiro con carabina",
-        detail: "Podio · Juegos Interfacultades PUCP 2026",
-        text: "Con mi equipo terminamos en el podio de tiro con carabina en los Juegos Interfacultades 2026.",
-        icon: "target",
-      },
-      {
         title: "Downhill",
         text: "Rutas en bicicleta por Cusco con mi primo, como la del Templo de la Luna.",
         icon: "bike",
+        image: "/images/life/downhill.webp",
+        imageAlt: "Fabricio y su primo con sus bicicletas junto a andenes incas en el Templo de la Luna, Cusco",
       },
       {
         title: "Surf",
         text: "Lo practico de forma recreativa.",
         icon: "wave",
+        image: "/images/life/surf.webp",
+        imageAlt: "Fabricio sonríe en la orilla del mar con su licra de surf",
       },
       {
         title: "Fútbol",

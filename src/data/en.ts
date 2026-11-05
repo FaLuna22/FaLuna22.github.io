@@ -292,10 +292,10 @@ export const en: SiteContent = {
     title: "Beyond data",
     intro: "What I do away from a dataset: sport, mountains, the sea and a creative side.",
     items: [
+      { title: "Rifle shooting", detail: "Podium · PUCP Inter-faculty Games 2026", text: "My team finished on the podium in rifle shooting at the 2026 Inter-faculty Games.", icon: "target", image: "/images/life/tiro.webp", imageAlt: "Fabricio aims an air rifle on the shooting line" },
       { title: "Amateur boxing", detail: "1 official fight won", text: "Certified boxer from the Tito Montes Academy in Cusco.", icon: "boxing" },
-      { title: "Rifle shooting", detail: "Podium · PUCP Inter-faculty Games 2026", text: "My team finished on the podium in rifle shooting at the 2026 Inter-faculty Games.", icon: "target" },
-      { title: "Downhill", text: "Bike rides around Cusco with my cousin, like the one to the Temple of the Moon.", icon: "bike" },
-      { title: "Surfing", text: "I surf recreationally.", icon: "wave" },
+      { title: "Downhill", text: "Bike rides around Cusco with my cousin, like the one to the Temple of the Moon.", icon: "bike", image: "/images/life/downhill.webp", imageAlt: "Fabricio and his cousin with their bikes next to Inca terraces at the Temple of the Moon, Cusco" },
+      { title: "Surfing", text: "I surf recreationally.", icon: "wave", image: "/images/life/surf.webp", imageAlt: "Fabricio smiles on the shore in his surf rash guard" },
       { title: "Football", text: "Pick-up games with my friends.", icon: "ball" },
       { title: "Singing, poetry and drawing", text: "My creative side: I sing, write poetry and draw.", icon: "pencil" },
       { title: "Design and video podcast", detail: "Art & Design Director · Económica PUCP", text: "I lead the visual identity, reels and video podcast that explain economics to non-specialist audiences.", icon: "palette" },
